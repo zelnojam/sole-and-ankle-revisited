@@ -16,3 +16,16 @@ export const WEIGHTS = {
   medium: 600,
   bold: 800,
 };
+
+const BREAKPOINTS = {
+  mobileMin: 37.5,
+  tabletMin: 59.375,
+  laptopMin: 81.25,
+};
+
+export const VIEW = {
+  mobile: `(max-width: ${BREAKPOINTS.mobileMin}rem)`,
+  tablet: `(max-width: ${BREAKPOINTS.tabletMin}rem)`,
+  laptop: `(max-width: ${BREAKPOINTS.laptopMin}rem)`,
+  tabletAndUp: `(min-width: ${BREAKPOINTS.tabletMin}rem)`,
+};

@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-import { COLORS, WEIGHTS } from '../../constants';
+import { VIEW, WEIGHTS } from '../../constants';
 import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
+import UnstyledButton from '../UnstyledButton';
+import Icon from '../Icon';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -22,14 +24,26 @@ const Header = () => {
           <Logo />
         </Side>
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href='/sale'>A&nbsp;Vendre</NavLink>
+          <NavLink href='/new'>Nouvellese&nbsp;Versions</NavLink>
+          <NavLink href='/men'>Hommes</NavLink>
+          <NavLink href='/women'>Femmes</NavLink>
+          <NavLink href='/kids'>Les&nbsp;Enfants</NavLink>
+          <NavLink href='/collections'>Collections</NavLink>
         </Nav>
-        <Side />
+        <Side>
+          <Buttons>
+            <UnstyledButton>
+              <Icon id='shopping-bag' />
+            </UnstyledButton>
+            <UnstyledButton>
+              <Icon id='search' />
+            </UnstyledButton>
+            <UnstyledButton onClick={() => setShowMobileMenu(true)}>
+              <Icon id='menu' />
+            </UnstyledButton>
+          </Buttons>
+        </Side>
       </MainHeader>
 
       <MobileMenu
@@ -45,13 +59,23 @@ const MainHeader = styled.div`
   align-items: baseline;
   padding: 18px 32px;
   height: 72px;
-  border-bottom: 1px solid ${COLORS.gray[300]};
+  border-bottom: 1px solid var(--color-gray-300);
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  @media ${VIEW.mobile} {
+    padding: 18px 16px;
+  }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(1rem, 9.5vw - 4.75rem, 3rem);
   margin: 0px 48px;
+
+  @media ${VIEW.tablet} {
+    display: none;
+  }
 `;
 
 const Side = styled.div`
@@ -62,11 +86,21 @@ const NavLink = styled.a`
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
-  color: ${COLORS.gray[900]};
+  color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
+  }
+`;
+
+const Buttons = styled.div`
+  display: none;
+
+  @media ${VIEW.tablet} {
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(1rem, 7vw - 1.5rem, 2rem);
   }
 `;
 
